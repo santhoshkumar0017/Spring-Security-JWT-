@@ -14,7 +14,7 @@ import java.util.Set;
 
 public class RegisterRequest {
 
-    private String username;
+    private String userName;
     private String password;
     private Set<String> roles; // A set of role name , to be passed in the request
 }

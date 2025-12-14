@@ -42,12 +42,12 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<String> register (@RequestBody RegisterRequest registerRequest){
 
-        if(userRepository.findByUsername(registerRequest.getUsername()).isPresent()){
+        if(userRepository.findByUserName(registerRequest.getUserName()).isPresent()){
             return ResponseEntity.badRequest().body("Username is already taken");
         }
 
         User newUser=new User();
-        newUser.setUserName(registerRequest.getUsername());
+        newUser.setUserName(registerRequest.getUserName());
 
         String encodePassword=passwordEncoder.encode(registerRequest.getPassword());
         newUser.setPassword(encodePassword);

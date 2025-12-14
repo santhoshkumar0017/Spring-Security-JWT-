@@ -33,12 +33,12 @@ public class JwtUtil {
     }
 
     //Generate token
-    public String generateToken(String username){
-        Optional<User> user = userRepository.findByUsername(username);
+    public String generateToken(String userName){
+        Optional<User> user = userRepository.findByUserName(userName);
         Set<Role> roles = user.get().getRoles();
 
 
-        return Jwts.builder().setSubject(username).claim("roles",roles.stream()
+        return Jwts.builder().setSubject(userName).claim("roles",roles.stream()
                 .map(role -> role.getName()).collect(Collectors.joining(",")))
                 .setIssuedAt(new Date()).setExpiration(new Date(new Date().getTime()+jwtExpirationMs))
                 .signWith(secretKey).compact();
